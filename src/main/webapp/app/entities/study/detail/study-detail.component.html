@@ -1,0 +1,52 @@
+<div class="row justify-content-start">
+  <div [ngClass]="setCollomsFromWidth()">
+    <div *ngIf="study">
+      <h2 data-cy="studyDetailsHeading"><span jhiTranslate="coursesApp.study.detail.title">Study</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ study.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="coursesApp.study.dateOfStart">Date Of Start</span></dt>
+        <dd>
+          <span>{{ study.dateOfStart | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="coursesApp.study.dateOfExam">Date Of Exam</span></dt>
+        <dd>
+          <span>{{ study.dateOfExam | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="coursesApp.study.grade">Grade</span></dt>
+        <dd>
+          <span>{{ study.grade }}</span>
+        </dd>
+
+        <dt><span jhiTranslate="coursesApp.study.coursename">Coursename</span></dt>
+        <dd>
+          <div *ngIf="study.coursename">
+            <a [routerLink]="['/courses', study.coursename?.id, 'view']">{{ study.coursename?.courseName }}</a>
+          </div>
+        </dd>
+
+        <dt><span jhiTranslate="coursesApp.study.student">Student</span></dt>
+        <dd>
+          <div *ngIf="study.student">
+            <a [routerLink]="['/student', study.student?.id, 'view']">{{ study.student?.firstName }}</a>
+          </div>
+        </dd>
+      </dl>
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/study', study.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+{
+  "dataDropDownMenu": {
+    "homeButton": "Home",
+    "LoggedIn": "Logged in as ",
+    "entitiesName": "Data",
+    "search": "Search",
+    "language": "Language",
+    "links": "Links",
+    "administration": "Administration"
+  }
+}

@@ -99,7 +99,7 @@ export class NavBarPage {
 export class SignInPage {
   username = element(by.id('username'));
   password = element(by.id('password'));
-  loginButton = element(by.css('button[type=submit]'));
+  loginButton = element(by.css('button[class=mat-focus-indicator loginButton mat-stroked-button mat-button-base]'));
 
   async setUserName(username: string): Promise<void> {
     await this.username.sendKeys(username);

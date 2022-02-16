@@ -19,7 +19,7 @@
           <mat-error *ngIf="loginForm.controls.password.errors">requared</mat-error>
         </mat-form-field>
         <div class="formButtons">
-          <button class="loginButton" (click)="login()" mat-stroked-button>Login</button>
+          <button class="loginButton" id="loginButton" (click)="login()" mat-stroked-button>Login</button>
           <button class="forgetButton" routerLink="/account/reset/request" mat-stroked-button>Forget password?</button>
         </div>
       </form>

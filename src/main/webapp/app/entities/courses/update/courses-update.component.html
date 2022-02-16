@@ -1,0 +1,125 @@
+<div class="row justify-content-start">
+  <div [ngClass]="setCollomsFromWidth()">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-author-heading" data-cy="AuthorCreateUpdateHeading">
+        <h2 *ngIf="editForm.get('id')!.value == null; else isedit" jhiTranslate="coursesApp.courses.home.createLabel">Create Courses</h2>
+        <ng-template #isedit><h2 jhiTranslate="coursesApp.courses.home.editLabel">Edit Courses</h2> </ng-template>
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <mat-form-field class="fullWidth" appearance="fill">
+            <mat-label jhiTranslate="global.field.id" for="field_id">ID</mat-label>
+            <input matInput type="number" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </mat-form-field>
+        </div>
+
+        <div class="form-group">
+          <mat-form-field class="fullWidth" appearance="fill">
+            <mat-label jhiTranslate="coursesApp.courses.courseName" for="field_courseName">Course Name</mat-label>
+            <input matInput type="text" name="courseName" id="field_courseName" data-cy="courseName" formControlName="courseName" />
+            <div *ngIf="editForm.get('courseName')!.invalid && (editForm.get('courseName')!.dirty || editForm.get('courseName')!.touched)">
+              <small
+                class="form-text text-danger"
+                *ngIf="editForm.get('courseName')?.errors?.required"
+                jhiTranslate="entity.validation.required"
+              >
+                This field is required.
+              </small>
+            </div>
+          </mat-form-field>
+        </div>
+
+        <div class="form-group">
+          <mat-form-field class="fullWidth" appearance="fill">
+            <mat-label jhiTranslate="coursesApp.courses.dateOfStart" for="field_dateOfStart">Date Of Start</mat-label>
+            <div class="input-group">
+              <input
+                matInput
+                id="field_dateOfStart"
+                data-cy="dateOfStart"
+                type="text"
+                name="dateOfStart"
+                ngbDatepicker
+                #dateOfStartDp="ngbDatepicker"
+                formControlName="dateOfStart"
+              />
+              <span class="input-group-append">
+                <button type="button" class="btn" (click)="dateOfStartDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+              </span>
+            </div>
+            <div
+              *ngIf="editForm.get('dateOfStart')!.invalid && (editForm.get('dateOfStart')!.dirty || editForm.get('dateOfStart')!.touched)"
+            >
+              <small
+                class="form-text text-danger"
+                *ngIf="editForm.get('dateOfStart')?.errors?.required"
+                jhiTranslate="entity.validation.required"
+              >
+                This field is required.
+              </small>
+            </div>
+          </mat-form-field>
+        </div>
+
+        <div class="form-group">
+          <mat-form-field class="fullWidth" appearance="fill">
+            <mat-label jhiTranslate="coursesApp.courses.dateOfEnd" for="field_dateOfEnd">Date Of End</mat-label>
+            <div class="input-group">
+              <input
+                matInput
+                id="field_dateOfEnd"
+                data-cy="dateOfEnd"
+                type="text"
+                name="dateOfEnd"
+                ngbDatepicker
+                #dateOfEndDp="ngbDatepicker"
+                formControlName="dateOfEnd"
+              />
+              <span class="input-group-append">
+                <button type="button" class="btn" (click)="dateOfEndDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+              </span>
+            </div>
+            <div *ngIf="editForm.get('dateOfEnd')!.invalid && (editForm.get('dateOfEnd')!.dirty || editForm.get('dateOfEnd')!.touched)">
+              <small
+                class="form-text text-danger"
+                *ngIf="editForm.get('dateOfEnd')?.errors?.required"
+                jhiTranslate="entity.validation.required"
+              >
+                This field is required.
+              </small>
+            </div>
+          </mat-form-field>
+        </div>
+
+        <div class="form-group">
+          <mat-form-field class="fullWidth" appearance="fill">
+            <mat-label>Name</mat-label>
+            <input type="text" matInput [matAutocomplete]="autoName" formControlName="name" />
+            <mat-autocomplete #autoName="matAutocomplete" [displayWith]="displayname">
+              <mat-option
+                [value]="providerOption.id === editForm.get('name')!.value?.id ? editForm.get('name')!.value : providerOption"
+                *ngFor="let providerOption of providersfilteredOptions | async; trackBy: trackProviderById"
+                [value]="providerOption"
+              >
+                Provider - {{ providerOption.name }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button type="submit" id="save-entity" data-cy="entityCreateSaveButton" [disabled]="editForm.invalid || isSaving" class="btn">
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

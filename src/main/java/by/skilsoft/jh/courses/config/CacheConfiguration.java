@@ -48,6 +48,10 @@ public class CacheConfiguration {
             createCache(cm, by.skilsoft.jh.courses.domain.User.class.getName());
             createCache(cm, by.skilsoft.jh.courses.domain.Authority.class.getName());
             createCache(cm, by.skilsoft.jh.courses.domain.User.class.getName() + ".authorities");
+            createCache(cm, by.skilsoft.jh.courses.domain.Courses.class.getName());
+            createCache(cm, by.skilsoft.jh.courses.domain.Provider.class.getName());
+            createCache(cm, by.skilsoft.jh.courses.domain.Student.class.getName());
+            createCache(cm, by.skilsoft.jh.courses.domain.Study.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

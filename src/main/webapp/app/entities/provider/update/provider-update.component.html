@@ -1,0 +1,51 @@
+<div class="row justify-content-start">
+  <div [ngClass]="setCollomsFromWidth()">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-author-heading" data-cy="AuthorCreateUpdateHeading">
+        <h2 *ngIf="editForm.get('id')!.value == null; else isedit" jhiTranslate="coursesApp.provider.home.createLabel">Create Provider</h2>
+        <ng-template #isedit><h2 jhiTranslate="coursesApp.provider.home.editLabel">Edit Provider</h2> </ng-template>
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <mat-form-field class="fullWidth" appearance="fill">
+            <mat-label jhiTranslate="global.field.id" for="field_id">ID</mat-label>
+            <input matInput type="number" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </mat-form-field>
+        </div>
+
+        <div class="form-group">
+          <mat-form-field class="fullWidth" appearance="fill">
+            <mat-label jhiTranslate="coursesApp.provider.name" for="field_name">Name</mat-label>
+            <input matInput type="text" name="name" id="field_name" data-cy="name" formControlName="name" />
+            <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+              <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required" jhiTranslate="entity.validation.required">
+                This field is required.
+              </small>
+              <small
+                class="form-text text-danger"
+                *ngIf="editForm.get('name')?.errors?.maxlength"
+                jhiTranslate="entity.validation.maxlength"
+                [translateValues]="{ max: 25 }"
+              >
+                This field cannot be longer than 25 characters.
+              </small>
+            </div>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button type="submit" id="save-entity" data-cy="entityCreateSaveButton" [disabled]="editForm.invalid || isSaving" class="btn">
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

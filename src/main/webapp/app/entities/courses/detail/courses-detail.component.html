@@ -1,0 +1,45 @@
+<div class="row justify-content-start">
+  <div [ngClass]="setCollomsFromWidth()">
+    <div *ngIf="courses">
+      <h2 data-cy="coursesDetailsHeading"><span jhiTranslate="coursesApp.courses.detail.title">Courses</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ courses.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="coursesApp.courses.courseName">Course Name</span></dt>
+        <dd>
+          <span>{{ courses.courseName }}</span>
+        </dd>
+        <dt><span jhiTranslate="coursesApp.courses.dateOfStart">Date Of Start</span></dt>
+        <dd>
+          <span>{{ courses.dateOfStart | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="coursesApp.courses.dateOfEnd">Date Of End</span></dt>
+        <dd>
+          <span>{{ courses.dateOfEnd | formatMediumDate }}</span>
+        </dd>
+
+        <dt><span jhiTranslate="coursesApp.courses.name">Name</span></dt>
+        <dd>
+          <div *ngIf="courses.name">
+            <a [routerLink]="['/provider', courses.name?.id, 'view']">{{ courses.name?.name }}</a>
+          </div>
+        </dd>
+      </dl>
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/courses', courses.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

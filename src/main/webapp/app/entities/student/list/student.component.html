@@ -1,0 +1,101 @@
+<div>
+  <h2 id="page-heading" data-cy="StudentHeading">
+    <span jhiTranslate="coursesApp.student.home.title">Students</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn mr-1" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="coursesApp.student.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button (click)="documentDownlound()" class="btn">Export</button>
+
+      <button id="jh-create-entity" data-cy="entityCreateButton" class="btn" [routerLink]="['/student/new']">
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="coursesApp.student.home.createLabel"> Create a new Student </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="table-responsive" id="entities">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" jhiSortBy="firstName">
+            <span jhiTranslate="coursesApp.student.firstName">First Name</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <input (input)="saveValue(criteria)" (focus)="saveValue(criteria)" type="text" [(ngModel)]="criteria.firstName" />
+          </td>
+
+          <td class="text-right">
+            <div class="buttons-group">
+              <button type="submit" class="btn search-button" data-cy="entityDetailsButton" (click)="filterAndSortEntities(1)">
+                <fa-icon icon="search"></fa-icon>
+                <span class="search-span" jhiTranslate="coursesApp.student.home.searchLabel">Search</span>
+              </button>
+
+              <button type="submit" class="btn" data-cy="entityEditButton" (click)="clearFields()">
+                <fa-icon icon="trash-alt"></fa-icon>
+              </button>
+            </div>
+          </td>
+        </tr>
+
+        <div class="alert alert-warning" id="no-result" *ngIf="students?.length === 0">
+          <span jhiTranslate="coursesApp.student.home.notFound">No students found</span>
+        </div>
+
+        <tr *ngFor="let student of students; trackBy: trackId" data-cy="entityTable">
+          <td>{{ student.firstName }}</td>
+
+          <td class="text-right">
+            <div class="buttons-group">
+              <button type="submit" [routerLink]="['/student', student.id, 'view']" class="btn btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/student', student.id, 'edit']" class="btn btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(student)" class="btn btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="students && students.length > 0">
+    <div class="row justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="filterAndSortEntities($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

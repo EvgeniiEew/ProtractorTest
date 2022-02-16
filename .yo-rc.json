@@ -34,7 +34,7 @@
     "clientTheme": "none",
     "clientThemeVariant": "",
     "applicationIndex": 0,
-    "entities": [],
+    "entities": ["Courses", "Provider", "Student", "Study"],
     "blueprints": [
       {
         "name": "generator-jhipster-avedi",

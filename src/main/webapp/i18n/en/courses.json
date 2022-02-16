@@ -1,0 +1,28 @@
+{
+  "coursesApp": {
+    "courses": {
+      "home": {
+        "title": "Courses",
+        "refreshListLabel": "Refresh list",
+        "searchLabel": "Search",
+        "createLabel": "Create a new Courses",
+        "editLabel": "Edit Courses",
+        "notFound": "No Courses found"
+      },
+      "created": "A new Courses is created with identifier {{ param }}",
+      "updated": "A Courses is updated with identifier {{ param }}",
+      "deleted": "A Courses is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Courses {{ id }}?"
+      },
+      "detail": {
+        "title": "Courses"
+      },
+      "id": "ID",
+      "courseName": "Course Name",
+      "dateOfStart": "Date Of Start",
+      "dateOfEnd": "Date Of End",
+      "name": "Name"
+    }
+  }
+}

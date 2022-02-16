@@ -1,0 +1,25 @@
+{
+  "coursesApp": {
+    "provider": {
+      "home": {
+        "title": "Providers",
+        "refreshListLabel": "Refresh list",
+        "searchLabel": "Search",
+        "createLabel": "Create a new Provider",
+        "editLabel": "Edit Provider",
+        "notFound": "No Providers found"
+      },
+      "created": "A new Provider is created with identifier {{ param }}",
+      "updated": "A Provider is updated with identifier {{ param }}",
+      "deleted": "A Provider is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Provider {{ id }}?"
+      },
+      "detail": {
+        "title": "Provider"
+      },
+      "id": "ID",
+      "name": "Name"
+    }
+  }
+}

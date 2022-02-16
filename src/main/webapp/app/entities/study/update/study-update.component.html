@@ -1,0 +1,148 @@
+<div class="row justify-content-start">
+  <div [ngClass]="setCollomsFromWidth()">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-author-heading" data-cy="AuthorCreateUpdateHeading">
+        <h2 *ngIf="editForm.get('id')!.value == null; else isedit" jhiTranslate="coursesApp.study.home.createLabel">Create Study</h2>
+        <ng-template #isedit><h2 jhiTranslate="coursesApp.study.home.editLabel">Edit Study</h2> </ng-template>
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <mat-form-field class="fullWidth" appearance="fill">
+            <mat-label jhiTranslate="global.field.id" for="field_id">ID</mat-label>
+            <input matInput type="number" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </mat-form-field>
+        </div>
+
+        <div class="form-group">
+          <mat-form-field class="fullWidth" appearance="fill">
+            <mat-label jhiTranslate="coursesApp.study.dateOfStart" for="field_dateOfStart">Date Of Start</mat-label>
+            <div class="input-group">
+              <input
+                matInput
+                id="field_dateOfStart"
+                data-cy="dateOfStart"
+                type="text"
+                name="dateOfStart"
+                ngbDatepicker
+                #dateOfStartDp="ngbDatepicker"
+                formControlName="dateOfStart"
+              />
+              <span class="input-group-append">
+                <button type="button" class="btn" (click)="dateOfStartDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+              </span>
+            </div>
+            <div
+              *ngIf="editForm.get('dateOfStart')!.invalid && (editForm.get('dateOfStart')!.dirty || editForm.get('dateOfStart')!.touched)"
+            >
+              <small
+                class="form-text text-danger"
+                *ngIf="editForm.get('dateOfStart')?.errors?.required"
+                jhiTranslate="entity.validation.required"
+              >
+                This field is required.
+              </small>
+            </div>
+          </mat-form-field>
+        </div>
+
+        <div class="form-group">
+          <mat-form-field class="fullWidth" appearance="fill">
+            <mat-label jhiTranslate="coursesApp.study.dateOfExam" for="field_dateOfExam">Date Of Exam</mat-label>
+            <div class="input-group">
+              <input
+                matInput
+                id="field_dateOfExam"
+                data-cy="dateOfExam"
+                type="text"
+                name="dateOfExam"
+                ngbDatepicker
+                #dateOfExamDp="ngbDatepicker"
+                formControlName="dateOfExam"
+              />
+              <span class="input-group-append">
+                <button type="button" class="btn" (click)="dateOfExamDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+              </span>
+            </div>
+            <div *ngIf="editForm.get('dateOfExam')!.invalid && (editForm.get('dateOfExam')!.dirty || editForm.get('dateOfExam')!.touched)">
+              <small
+                class="form-text text-danger"
+                *ngIf="editForm.get('dateOfExam')?.errors?.required"
+                jhiTranslate="entity.validation.required"
+              >
+                This field is required.
+              </small>
+            </div>
+          </mat-form-field>
+        </div>
+
+        <div class="form-group">
+          <mat-form-field class="fullWidth" appearance="fill">
+            <mat-label jhiTranslate="coursesApp.study.grade" for="field_grade">Grade</mat-label>
+            <input matInput type="number" name="grade" id="field_grade" data-cy="grade" formControlName="grade" />
+            <div *ngIf="editForm.get('grade')!.invalid && (editForm.get('grade')!.dirty || editForm.get('grade')!.touched)">
+              <small
+                class="form-text text-danger"
+                *ngIf="editForm.get('grade')?.errors?.required"
+                jhiTranslate="entity.validation.required"
+              >
+                This field is required.
+              </small>
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('grade')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+              >
+                This field should be a number.
+              </small>
+            </div>
+          </mat-form-field>
+        </div>
+
+        <div class="form-group">
+          <mat-form-field class="fullWidth" appearance="fill">
+            <mat-label>Coursename</mat-label>
+            <input type="text" matInput [matAutocomplete]="autoCoursename" formControlName="coursename" />
+            <mat-autocomplete #autoCoursename="matAutocomplete" [displayWith]="displaycoursename">
+              <mat-option
+                [value]="coursesOption.id === editForm.get('coursename')!.value?.id ? editForm.get('coursename')!.value : coursesOption"
+                *ngFor="let coursesOption of coursesfilteredOptions | async; trackBy: trackCoursesById"
+                [value]="coursesOption"
+              >
+                Coursename: {{ coursesOption.courseName }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+
+        <div class="form-group">
+          <mat-form-field class="fullWidth" appearance="fill">
+            <mat-label>Student</mat-label>
+            <input type="text" matInput [matAutocomplete]="autoStudent" formControlName="student" />
+            <mat-autocomplete #autoStudent="matAutocomplete" [displayWith]="displaystudent">
+              <mat-option
+                [value]="studentOption.id === editForm.get('student')!.value?.id ? editForm.get('student')!.value : studentOption"
+                *ngFor="let studentOption of studentsfilteredOptions | async; trackBy: trackStudentById"
+                [value]="studentOption"
+              >
+                Name - {{ studentOption.firstName }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button type="submit" id="save-entity" data-cy="entityCreateSaveButton" [disabled]="editForm.invalid || isSaving" class="btn">
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
