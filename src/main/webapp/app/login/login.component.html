@@ -1,0 +1,28 @@
+<div>
+  <div class="row">
+    <div class="col-lg-6 col-md-8 col-sm-10">
+      <h1 class="formTitle" jhiTranslate="login.title" data-cy="loginTitle">Sign in</h1>
+      <div class="alert alert-danger" *ngIf="authenticationError" jhiTranslate="login.messages.error.authentication" data-cy="loginError">
+        <strong>Failed to sign in!</strong> Please check your credentials and try again.
+      </div>
+
+      <form [formGroup]="loginForm" class="loginForm" novalidate>
+        <mat-form-field class="fullWidth" appearance="fill">
+          <mat-label>Username</mat-label>
+          <input formControlName="username" type="text" name="username" id="username" matInput placeholder="Username" />
+          <mat-error *ngIf="loginForm.controls.username.errors">requared</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="fullWidth" appearance="fill">
+          <mat-label>Password</mat-label>
+          <input formControlName="password" type="password" name="password" matInput placeholder="Password" />
+          <mat-error *ngIf="loginForm.controls.password.errors">requared</mat-error>
+        </mat-form-field>
+        <div class="formButtons">
+          <button class="loginButton" (click)="login()" mat-stroked-button>Login</button>
+          <button class="forgetButton" routerLink="/account/reset/request" mat-stroked-button>Forget password?</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

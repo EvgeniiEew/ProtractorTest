@@ -1,0 +1,40 @@
+<div>
+  <router-outlet name="navbar"></router-outlet>
+</div>
+<div [ngSwitch]="account !== null">
+  <div *ngSwitchCase="true" class="links container-fluid mt-1">
+    <div class="navigation">
+      <div class="user-navigation"><span jhiTranslate="dataDropDownMenu.LoggedIn">Logged in as</span> {{ account!.login | titlecase }}</div>
+      <div class="app-navigation">
+        <div class="apps-links">
+          <a routerLink="/">HOME</a>
+          <a href="https://tiger.sqilsoft.by/acl/dev" target="_blank">Acl</a>
+          <a href="https://tiger.sqilsoft.by/car/dev" target="_blank">Car</a>
+          <a href="https://tiger.sqilsoft.by/library/dev" target="_blank">Library</a>
+        </div>
+        <div class="languages-links" *ngFor="let language of languages">
+          <span>|</span>
+          <button class="languages-buttons" (click)="changeLanguage(language)">
+            {{ language | findLanguageFromKey }}
+          </button>
+        </div>
+        <span>|</span>
+        <div>
+          <button class="sign-out-buttons" (click)="logout()"><span jhiTranslate="global.menu.account.logout">Sign out</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid mt-1">
+  <div class="row" [ngSwitch]="account !== null">
+    <jhi-menu [ngClass]="setMenuColloms()" (newCollomsEvent)="parseCollomsObject($event)" *ngSwitchCase="true"></jhi-menu>
+
+    <div [ngClass]="setMainColloms()">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+
+  <jhi-footer></jhi-footer>
+</div>

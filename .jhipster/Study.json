@@ -1,0 +1,77 @@
+{
+  "idFieldAsDatabaseColumn": "id",
+  "changelogDate": "20200901090000",
+  "pagination": "pagination",
+  "avediEntityShortName": "",
+  "readOnly": false,
+  "menuGroup": "Working data",
+  "entityTableName": "study",
+  "relationships": [
+    {
+      "relationshipName": "coursename",
+      "relationshipType": "many-to-one",
+      "ownerSide": true,
+      "listPageShow": "true",
+      "fieldValidateRules": ["required"],
+      "otherEntityName": "courses",
+      "constraintName": "course_id",
+      "otherEntityField": "courseName",
+      "indexNumber": 1,
+      "otherEntityRelationshipName": "Study",
+      "lookupValuePattern": ""
+    },
+    {
+      "relationshipName": "student",
+      "relationshipType": "many-to-one",
+      "ownerSide": true,
+      "listPageShow": "true",
+      "fieldValidateRules": ["required"],
+      "otherEntityName": "student",
+      "constraintName": "student_id",
+      "otherEntityField": "firstName",
+      "indexNumber": 5,
+      "otherEntityRelationshipName": "Study",
+      "lookupValuePattern": "Name - ${firstName}"
+    }
+  ],
+  "fluentMethods": true,
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": true,
+  "name": "Study",
+  "viewType": "plain",
+  "clientRootFolder": "",
+  "pk": {
+    "fieldNameAsDatabaseColumn": "id",
+    "fieldCaption": "ID",
+    "listPageShow": "false",
+    "fieldType": "Long"
+  },
+  "fields": [
+    {
+      "fieldNameAsDatabaseColumn": "date_of_start",
+      "fieldName": "dateOfStart",
+      "listPageShow": "true",
+      "fieldValidateRules": ["required"],
+      "indexNumber": 2,
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldNameAsDatabaseColumn": "date_of_exam",
+      "fieldName": "dateOfExam",
+      "fieldValidateRules": ["required"],
+      "indexNumber": 3,
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldNameAsDatabaseColumn": "grade",
+      "fieldName": "grade",
+      "fieldValidateRules": ["required"],
+      "indexNumber": 4,
+      "fieldType": "Integer"
+    }
+  ],
+  "avediEntityPluralName": "",
+  "embedded": false,
+  "dto": "mapstruct",
+  "applications": "*"
+}

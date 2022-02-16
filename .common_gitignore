@@ -1,0 +1,10 @@
+.avedi
+diagram.jdl
+init.sh
+test.txt
+file.txt
+build/node_modules
+client/avedi/node_modules
+client/clientProject/node_modules
+.idea
+client/avedi

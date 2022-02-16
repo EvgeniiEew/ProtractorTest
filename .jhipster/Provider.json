@@ -1,0 +1,37 @@
+{
+  "idFieldAsDatabaseColumn": "id",
+  "changelogDate": "20200901090000",
+  "pagination": "pagination",
+  "avediEntityShortName": "",
+  "readOnly": false,
+  "menuGroup": "Working data",
+  "entityTableName": "provider",
+  "relationships": [],
+  "fluentMethods": true,
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": true,
+  "name": "Provider",
+  "viewType": "plain",
+  "clientRootFolder": "",
+  "pk": {
+    "fieldNameAsDatabaseColumn": "id",
+    "fieldCaption": "ID",
+    "listPageShow": "false",
+    "fieldType": "Long"
+  },
+  "fields": [
+    {
+      "isName": "true",
+      "fieldName": "name",
+      "fieldValidateRulesMaxlength": 25,
+      "listPageShow": "true",
+      "fieldValidateRules": ["required", "maxlength"],
+      "indexNumber": 1,
+      "fieldType": "String"
+    }
+  ],
+  "avediEntityPluralName": "",
+  "embedded": false,
+  "dto": "mapstruct",
+  "applications": "*"
+}

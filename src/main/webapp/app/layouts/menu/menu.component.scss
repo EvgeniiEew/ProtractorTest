@@ -1,0 +1,106 @@
+.accordion {
+  display: block;
+  max-width: 300px;
+}
+
+.accordion-item {
+  display: block;
+  border-top: 1px solid #a7a7a7;
+  border-right: 1px solid #a7a7a7;
+  border-left: 1px solid #a7a7a7;
+}
+
+.accordion-item + .accordion-item {
+  border-top: none;
+}
+
+.accordion-item-header {
+  display: flex;
+  align-content: center;
+  justify-content: space-between;
+  padding: 5px;
+  background-color: #fff200c0;
+}
+
+.accordion-item-header:hover {
+  cursor: pointer;
+  background-color: #fff200;
+}
+
+.accordion-item-body {
+  padding-bottom: 0px;
+}
+
+// border-top
+cdk-accordion:first-child {
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+}
+
+cdk-accordion:last-child {
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+  border-bottom: solid 1px #a7a7a7;
+}
+
+// inner accordion
+.inner-accordion-item {
+  display: block;
+}
+
+// after hover
+.inner-accordion-item-body:hover {
+  background-color: #f9f300;
+}
+
+// margin text in div
+.inner-accordion-item-body {
+  padding-top: 5px;
+  padding-left: 5px;
+  background-color: #fff2003a;
+}
+
+a {
+  font-weight: normal;
+  text-decoration: none; // hidden underline
+}
+
+.search-button {
+  display: flex;
+  align-content: center;
+  justify-content: space-between;
+  max-width: 300px;
+  padding: 5px;
+  margin-bottom: 5px;
+  margin-top: 2px;
+  border: solid 1px #a7a7a7;
+  background-color: #f9f300;
+}
+
+.search-button:hover {
+  cursor: pointer;
+  background-color: #fff200;
+}
+
+@media (max-width: 480px) {
+  .hidden-menu-button {
+    display: none;
+  }
+}
+
+.collapseMenuGroupEntity {
+  display: none;
+}
+
+.menuGroupEntity {
+  padding-left: 15px;
+}
+
+.groupName {
+  color: #292929cc;
+  padding-left: 10px;
+}
+
+.entityObject {
+  padding-left: 15px;
+}

@@ -1,0 +1,66 @@
+{
+  "idFieldAsDatabaseColumn": "id",
+  "changelogDate": "20200901090000",
+  "pagination": "pagination",
+  "avediEntityShortName": "",
+  "readOnly": false,
+  "menuGroup": "Available courses",
+  "entityTableName": "courses",
+  "relationships": [
+    {
+      "relationshipName": "name",
+      "relationshipType": "many-to-one",
+      "ownerSide": true,
+      "fieldValidateRules": ["required"],
+      "otherEntityName": "provider",
+      "constraintName": "provider_id",
+      "otherEntityField": "name",
+      "indexNumber": 4,
+      "otherEntityRelationshipName": "Courses",
+      "lookupValuePattern": "Provider - ${name}"
+    }
+  ],
+  "fluentMethods": true,
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": true,
+  "name": "Courses",
+  "viewType": "plain",
+  "clientRootFolder": "",
+  "pk": {
+    "fieldNameAsDatabaseColumn": "id",
+    "fieldCaption": "ID",
+    "listPageShow": "false",
+    "fieldType": "Long"
+  },
+  "fields": [
+    {
+      "fieldNameAsDatabaseColumn": "course_name",
+      "isName": "true",
+      "fieldName": "courseName",
+      "listPageShow": "true",
+      "fieldValidateRules": ["required"],
+      "indexNumber": 1,
+      "fieldType": "String"
+    },
+    {
+      "fieldNameAsDatabaseColumn": "date_of_start",
+      "fieldName": "dateOfStart",
+      "listPageShow": "true",
+      "fieldValidateRules": ["required"],
+      "indexNumber": 2,
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldNameAsDatabaseColumn": "date_of_end",
+      "fieldName": "dateOfEnd",
+      "listPageShow": "true",
+      "fieldValidateRules": ["required"],
+      "indexNumber": 3,
+      "fieldType": "LocalDate"
+    }
+  ],
+  "avediEntityPluralName": "",
+  "embedded": false,
+  "dto": "mapstruct",
+  "applications": "*"
+}

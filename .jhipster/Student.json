@@ -1,0 +1,52 @@
+{
+  "idFieldAsDatabaseColumn": "id",
+  "changelogDate": "20200901090000",
+  "pagination": "pagination",
+  "avediEntityShortName": "",
+  "readOnly": false,
+  "menuGroup": "Working data",
+  "entityTableName": "student",
+  "relationships": [],
+  "fluentMethods": true,
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": true,
+  "name": "Student",
+  "viewType": "plain",
+  "clientRootFolder": "",
+  "pk": {
+    "fieldNameAsDatabaseColumn": "id",
+    "fieldCaption": "ID",
+    "listPageShow": "false",
+    "fieldType": "Long"
+  },
+  "fields": [
+    {
+      "fieldNameAsDatabaseColumn": "first_name",
+      "isName": "true",
+      "fieldName": "firstName",
+      "fieldValidateRulesMaxlength": 25,
+      "listPageShow": "true",
+      "fieldValidateRules": ["required", "maxlength"],
+      "indexNumber": 1,
+      "fieldType": "String"
+    },
+    {
+      "fieldNameAsDatabaseColumn": "last_name",
+      "fieldName": "lastName",
+      "fieldValidateRules": ["required"],
+      "indexNumber": 2,
+      "fieldType": "String"
+    },
+    {
+      "fieldNameAsDatabaseColumn": "date_of_birthday",
+      "fieldName": "dateOfBirthday",
+      "fieldValidateRules": ["required"],
+      "indexNumber": 3,
+      "fieldType": "LocalDate"
+    }
+  ],
+  "avediEntityPluralName": "",
+  "embedded": false,
+  "dto": "mapstruct",
+  "applications": "*"
+}

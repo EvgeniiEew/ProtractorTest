@@ -1,0 +1,21 @@
+application {
+  config {
+    baseName courses,
+    applicationType monolith,
+    packageName by.skilsoft.jh.courses,
+    authenticationType jwt,
+    databaseType sql,
+    devDatabaseType postgresql,
+    prodDatabaseType postgresql,
+    clientFramework angular,
+    languages [en, de],
+    websocket spring-websocket,
+    enableSwaggerCodegen true,
+    testFrameworks [protractor, gatling]
+
+  }
+    entities *
+
+    dto * with mapstruct
+    service * with serviceImpl
+}

@@ -1,0 +1,54 @@
+version: '3.1'
+services:
+  jh_courses:
+    image: openjdk:11.0.11
+    container_name: 'jh_courses-dev'
+    restart: always
+    volumes:
+      - '/home/jh_courses-dev/app/build/build/libs/:/app'
+    entrypoint: ['java', '-jar', '/app/courses-0.0.1-SNAPSHOT.jar']
+    networks:
+      - courses_default
+
+  node_jh:
+    image: jh_courses_front-dev
+    container_name: 'jh_courses_front-dev'
+    restart: always
+    command: bash -c "cd ./clientProject && npm install && ng serve --ssl"
+    ports:
+      - '9000'
+      - '9001'
+    networks:
+      - courses_default
+
+  nginx:
+    image: nginx:alpine
+    container_name: 'nginx_courses-dev'
+    restart: always
+    volumes:
+      - /home/jh_courses-dev/app/build/nginx/logs/:/var/log/nginx/
+      - /home/jh_courses-dev/app/build/nginx_courses/nginx.conf:/etc/nginx/nginx.conf
+      - /home/jh_courses-dev/app/build/nginx_courses/browser-sync-client/browser-sync-client.js:/etc/nginx/courses/browser-sync/browser-sync-client.js
+    ports:
+      - '8062:80'
+    networks:
+      - courses_default
+
+  jh_db:
+    image: postgres:11
+    restart: always
+    container_name: 'jh_db-courses-dev'
+    environment:
+      - POSTGRES_PASSWORD=1111
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=courses
+    volumes:
+      - /home/jh_courses-dev/app/data:/var/lib/postgresql/data
+    ports:
+      - '8162:5432'
+    networks:
+      - courses_default
+
+networks:
+  courses_default:
+    driver: bridge

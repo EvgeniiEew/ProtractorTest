@@ -1,0 +1,51 @@
+{	"styleId": "rbi",
+	"serverPathLocation": "",
+	"host":"localhost",
+	"microserviceUrl" : "https://practice.sqilsoft.by/sandbox/yury_sinkevich/microservice_acl/dev",
+"dev":{
+    "dbName" : "jdbc:postgresql://localhost:5432/",
+	"dbLogin" : "postgres",
+	"dbPassword": "1111",
+	"baseSecret": "ZWU4OGIwN2Y4NmE5NWQ3OWM2ZWFhMGVmZmQ2YTlkZmUwMmUxZDg2OGQ4NmZkMzUzMzlhZTQyYzYwYTk1ZTg5ZWMzZjU3MzY2Yzg2ZTNkYWJiZTFmY2YzNGZlZmMzNzgyMDQxYmNiOWVmYzYzZGE0NGUxNWQyMzgzMzM4YzhjNjQ="
+    },
+"prod":{
+	"dbName" : "jdbc:postgresql://jh_db-courses-dev:5432/",
+	"dbLogin" : "postgres",
+	"dbPassword": "jhipster-team-sqilsoft-123321",
+	"baseSecret": "ZWU4OGIwN2Y4NmE5NWQ3OWM2ZWFhMGVmZmQ2YTlkZmUwMmUxZDg2OGQ4NmZkMzUzMzlhZTQyYzYwYTk1ZTg5ZWMzZjU3MzY2Yzg2ZTNkYWJiZTFmY2YzNGZlZmMzNzgyMDQxYmNiOWVmYzYzZGE0NGUxNWQyMzgzMzM4YzhjNjQ="
+    },
+"docker":{
+	"image": "openjdk:11.0.11",
+	"port": "8062",
+  	"port_db":"8162"
+	}	,
+	"enableAcl": false,
+	"links" : [
+        {
+            "name" : "HOME",
+            "path" : "/"
+        },
+        {
+            "name" : "Acl",
+            "path" : "https://tiger.sqilsoft.by/acl/dev"
+        },
+        {
+            "name" : "Car",
+            "path" : "https://tiger.sqilsoft.by/car/dev"
+        },
+        {
+            "name" : "Library",
+            "path" : "https://tiger.sqilsoft.by/library/dev"
+        }
+    ],
+   "defaultSearchEntity": "Courses",
+    "applicationVersion":"dev",
+	"enableLogs": false,
+	"enableLogsPortHostdestinationLogStage" : "192.168.1.30:5000",
+	"enableLogsPassword" : "123456",
+"UI": {
+        "menuGroupsName": ["Available courses", "Working data"],
+        "addEntityWithoutGroup": false,
+        "defaultGroupName": "default"
+    }
+}

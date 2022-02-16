@@ -1,0 +1,142 @@
+<div class="menu-attributes" [ngbCollapse]="false" [ngSwitch]="account !== null">
+  <div class="hidden-menu-button">
+    <a (click)="collapse.toggle()" (click)="changeColloms()" [attr.aria-expanded]="!isCollapsed">
+      <fa-icon icon="bars"></fa-icon>
+    </a>
+  </div>
+  <div #collapse="ngbCollapse" [animation]="false" [(ngbCollapse)]="isCollapsed">
+    <div class="search-button" routerLink="{{ pathToEntity() }}"><span jhiTranslate="dataDropDownMenu.homeButton">Home</span></div>
+
+    <div class="accordionMenu">
+      <cdk-accordion *ngFor="let item of mainMenu; let index = index" class="accordion" multi="true">
+        <cdk-accordion-item
+          *jhiHasAnyAuthority="item.role || ''"
+          #accEntititesItem="cdkAccordionItem"
+          class="accordion-item"
+          role="button"
+          tabindex="0"
+          [attr.id]="'accordion-header-' + index"
+          [attr.aria-expanded]="accEntititesItem.expanded"
+        >
+          <div *ngIf="item.name !== 'Language'">
+            <div *ngIf="item.name !== 'Links'">
+              <div *ngIf="item.name !== 'Data'">
+                <div class="accordion-item-header" (click)="accEntititesItem.toggle()">
+                  <span jhiTranslate="{{ item.jhiTranslateKey }}">{{ item.name }}</span>
+                </div>
+                <a *ngFor="let entity of getSortedMenuGroup(item.menuGroup)">
+                  <div *ngIf="entity.name !== 'Sign out'">
+                    <div
+                      class="inner-accordion-item-body"
+                      routerLink="{{ entity.path }}"
+                      [style.display]="accEntititesItem.expanded ? '' : 'none'"
+                      (click)="setCollapseClickEvent(collapse)"
+                    >
+                      <span *ngIf="entity.jhiTranslateKey.length > 0">
+                        {{ entity.jhiTranslateKey | translate }}
+                      </span>
+                      <span *ngIf="entity.jhiTranslateKey.length === 0">
+                        {{ entity.name }}
+                      </span>
+                    </div>
+                  </div>
+                  <div *ngIf="entity.name === 'Sign out'">
+                    <a
+                      ><div class="inner-accordion-item-body" (click)="logout()" [style.display]="accEntititesItem.expanded ? '' : 'none'">
+                        <span jhiTranslate="global.menu.account.logout">Sign out</span>
+                      </div>
+                    </a>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="item.name === 'Data'">
+            <div *ngIf="item.menuGroup.length !== 0">
+              <div class="accordion-item-header" (click)="toggleCollapseAllGroups()" (click)="accEntititesItem.toggle()">
+                <span jhiTranslate="{{ item.jhiTranslateKey }}">{{ item.name }}</span>
+              </div>
+              <div *ngFor="let entityData of item.menuGroup.sort()">
+                <div *ngIf="entityData.entities.length === 0">
+                  <div
+                    class="inner-accordion-item-body groupName"
+                    routerLink="{{ entityData.path }}"
+                    [style.display]="accEntititesItem.expanded ? '' : 'none'"
+                    (click)="setCollapseClickEvent(collapse)"
+                  >
+                    {{ entityData.name }}
+                  </div>
+                </div>
+                <div *ngIf="entityData.entities.length !== 0">
+                  <div
+                    class="inner-accordion-item-body groupName"
+                    [style.display]="accEntititesItem.expanded ? '' : 'none'"
+                    (click)="collapseMenuGroup()"
+                    (click)="toggleToCollapseOneGroup(entityData.name)"
+                  >
+                    {{ entityData.name }}
+                  </div>
+                  <a *ngFor="let object of entityData.entities">
+                    <div
+                      class="inner-accordion-item-body entityObject"
+                      [style.display]="entityData.open ? '' : 'none'"
+                      routerLink="{{ object.path }}"
+                      (click)="setCollapseClickEvent(collapse)"
+                    >
+                      {{ object.name }}
+                    </div></a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="item.name === 'Language'">
+            <div class="accordion-item-header language" (click)="accEntititesItem.toggle()">
+              <span jhiTranslate="{{ item.jhiTranslateKey }}">{{ item.name }}</span>
+            </div>
+            <a *ngFor="let entity of item.menuGroup">
+              <div
+                class="inner-accordion-item-body"
+                (click)="changeLanguage(entity.langCode)"
+                [style.display]="accEntititesItem.expanded ? '' : 'none'"
+                (click)="setCollapseClickEvent(collapse)"
+              >
+                {{ entity.langCode | findLanguageFromKey }}
+              </div>
+            </a>
+          </div>
+          <div *ngIf="item.name === 'Links'">
+            <div class="accordion-item-header" (click)="accEntititesItem.toggle()">
+              <span jhiTranslate="{{ item.jhiTranslateKey }}">{{ item.name }}</span>
+            </div>
+            <div *ngFor="let entity of item.menuGroup">
+              <div *ngIf="entity.path === '/'">
+                <div
+                  class="inner-accordion-item-body"
+                  (click)="changeLanguage(entity.langCode)"
+                  routerLink="{{ entity.path }}"
+                  [style.display]="accEntititesItem.expanded ? '' : 'none'"
+                  (click)="setCollapseClickEvent(collapse)"
+                >
+                  {{ entity.name }}
+                </div>
+              </div>
+              <div *ngIf="entity.path !== '/'">
+                <a href="{{ entity.path }}" target="_blank">
+                  <div
+                    class="inner-accordion-item-body"
+                    (click)="changeLanguage(entity.langCode)"
+                    [style.display]="accEntititesItem.expanded ? '' : 'none'"
+                    (click)="setCollapseClickEvent(collapse)"
+                  >
+                    {{ entity.name }}
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </cdk-accordion-item>
+      </cdk-accordion>
+    </div>
+  </div>
+</div>

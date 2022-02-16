@@ -1,0 +1,99 @@
+/* ==========================================================================
+Main page styles
+========================================================================== */
+
+.hipster {
+  display: inline-block;
+  width: 347px;
+  height: 497px;
+  background: url('../../content/images/jhipster_family_member_3.svg') no-repeat center top;
+  background-size: contain;
+}
+
+/* wait autoprefixer update to allow simple generation of high pixel density media query */
+@media only screen and (-webkit-min-device-pixel-ratio: 2),
+  only screen and (-moz-min-device-pixel-ratio: 2),
+  only screen and (-o-min-device-pixel-ratio: 2/1),
+  only screen and (min-resolution: 192dpi),
+  only screen and (min-resolution: 2dppx) {
+  .hipster {
+    background: url('../../content/images/jhipster_family_member_3.svg') no-repeat center top;
+    background-size: contain;
+  }
+}
+
+@media (max-width: 480px) {
+  .jh-card {
+    margin-top: 0px;
+  }
+
+  .contactTitle {
+    padding-top: 5px;
+    padding-left: 15px;
+    font-size: 20px;
+  }
+
+  .contactDescription {
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-bottom: 10px;
+  }
+}
+
+.contact {
+  height: 100%;
+  width: 100%;
+  border: solid 1px rgb(192, 192, 192);
+  border-radius: 4px;
+  background-color: #fff2003a;
+}
+
+.contactTitle {
+  padding-top: 30px;
+  padding-left: 40px;
+  font-size: 20px;
+}
+
+.contactDescription {
+  margin-left: 40px;
+  margin-right: 40px;
+}
+
+.textBold {
+  font-weight: bold;
+}
+
+.loginForm {
+  min-width: 100px;
+  max-width: 300px;
+  width: 100%;
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+.loginButton {
+  background-color: #fff2003a;
+}
+
+.forgetButton {
+  margin-top: 10px;
+  background-color: #fff2003a;
+}
+
+.registerButton {
+  background-color: #fff2003a;
+}
+
+.registrationBlock {
+  margin-top: 10px;
+}
+
+span {
+  margin-right: 30px;
+}
+
+dd {
+  margin-left: 20px;
+}

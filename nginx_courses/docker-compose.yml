@@ -1,0 +1,19 @@
+version: '3.5'
+services:
+  web:
+    image: nginx
+    container_name: 'web_nginx_courses'
+    volumes:
+      - ./logs/nginx:/var/log/nginx
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./browser-sync-client/browser-sync-client.js:/etc/nginx/courses/browser-sync/browser-sync-client.js
+    ports:
+      - '8062:80'
+    environment:
+      - NGINX_HOST=foobar.com
+      - NGINX_PORT=8062
+
+networks:
+  default:
+    external:
+      name: courses_default

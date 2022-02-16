@@ -1,0 +1,58 @@
+{
+  "generator-jhipster": {
+    "authenticationType": "jwt",
+    "cacheProvider": "ehcache",
+    "clientFramework": "angularX",
+    "serverPort": "8080",
+    "serviceDiscoveryType": false,
+    "skipUserManagement": false,
+    "withAdminUi": true,
+    "baseName": "courses",
+    "buildTool": "maven",
+    "databaseType": "sql",
+    "devDatabaseType": "postgresql",
+    "enableHibernateCache": true,
+    "enableSwaggerCodegen": true,
+    "enableTranslation": true,
+    "jhiPrefix": "jhi",
+    "languages": ["en", "de"],
+    "messageBroker": false,
+    "prodDatabaseType": "postgresql",
+    "searchEngine": false,
+    "testFrameworks": ["protractor", "gatling"],
+    "websocket": "spring-websocket",
+    "enableGradleEnterprise": false,
+    "gradleEnterpriseHost": "",
+    "applicationType": "monolith",
+    "packageName": "by.skilsoft.jh.courses",
+    "packageFolder": "by/skilsoft/jh/courses",
+    "jhipsterVersion": "7.4.1",
+    "clientPackageManager": "npm",
+    "dtoSuffix": "DTO",
+    "entitySuffix": "",
+    "reactive": false,
+    "clientTheme": "none",
+    "clientThemeVariant": "",
+    "applicationIndex": 0,
+    "entities": [],
+    "blueprints": [
+      {
+        "name": "generator-jhipster-avedi",
+        "version": "0.3.0"
+      }
+    ],
+    "otherModules": [
+      {
+        "name": "generator-jhipster-avedi",
+        "version": "0.3.0"
+      }
+    ],
+    "skipCheckLengthOfIdentifier": false,
+    "skipFakeData": false,
+    "pages": [],
+    "creationTimestamp": 1645002741646,
+    "jwtSecretKey": "MDBjOTQ0YzIyNmNhOTVhNDM0MTJkNDk2MjNhNTY1ZmE0YmYzMzE4NzM1MDBmYjNjYmYwNTYwMDU0YTVmMzczYTQ2MjViMzc3MDRhNTJlNzZlN2Q3NjAzODE2Njk0NGQwN2FlMjRiMzk5ODAyZTI5YTkyOTQzNTMzNTgyYzM0NDk=",
+    "devServerPort": 4200,
+    "nativeLanguage": "en"
+  }
+}
