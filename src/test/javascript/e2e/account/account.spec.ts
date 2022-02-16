@@ -14,7 +14,6 @@ describe('account', () => {
   let navBarPage: NavBarPage;
   const username = process.env.E2E_USERNAME ?? 'admin';
   const password = process.env.E2E_PASSWORD ?? 'admin';
-
   before(async () => {
     await browser.get('/');
     navBarPage = new NavBarPage(true);
