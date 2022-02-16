@@ -13,8 +13,12 @@ describe('administration', () => {
   before(async () => {
     await browser.get('/');
     navBarPage = new NavBarPage(true);
-    signInPage = await navBarPage.getSignInPage();
-    await signInPage.autoSignInUsing(username, password);
+    let input_login =element(by.css("input[id='username']"));
+    await input_login.sendKeys(username);
+    let input_password =element(by.css("input[formcontrolname='password']"));
+    await input_password.sendKeys(password);
+    let submit_button = element(by.id('loginButton'));
+    await submit_button.click();
     await browser.wait(ec.visibilityOf(navBarPage.adminMenu), 5000);
   });
 
@@ -63,9 +67,5 @@ describe('administration', () => {
     const expect1 = 'logs.title';
     const value1 = await heading.getAttribute('jhiTranslate');
     expect(value1).to.eq(expect1);
-  });
-
-  after(async () => {
-    await navBarPage.autoSignOut();
   });
 });

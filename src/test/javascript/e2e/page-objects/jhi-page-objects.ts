@@ -13,7 +13,7 @@ export class NavBarPage {
 
   constructor(asAdmin?: boolean) {
     if (asAdmin) {
-      this.adminMenu = element(by.id('admin-menu'));
+      this.adminMenu = element(by.id('accordion-header-1'));
     }
   }
 
@@ -54,7 +54,7 @@ export class NavBarPage {
   }
 
   async clickOnAdmin(entityName: string): Promise<void> {
-    await element(by.css('[routerLink="admin/' + entityName + '"]')).click();
+    await element(by.css('[ng-reflect-router-link="admin/' + entityName + '"]')).click();
   }
 
   async getSignInPage(): Promise<SignInPage> {
