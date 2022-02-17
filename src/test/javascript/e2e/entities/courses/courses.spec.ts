@@ -1,10 +1,13 @@
-import { browser, ExpectedConditions as ec, promise } from 'protractor';
+import {browser, by, element, ExpectedConditions as ec, promise} from 'protractor';
 import { NavBarPage, SignInPage } from '../../page-objects/jhi-page-objects';
 
 import { CoursesComponentsPage, CoursesDeleteDialog, CoursesUpdatePage } from './courses.page-object';
 
 const expect = chai.expect;
 
+  function sleep(ms: number | undefined) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 describe('Courses e2e test', () => {
   let navBarPage: NavBarPage;
   let signInPage: SignInPage;
@@ -15,11 +18,17 @@ describe('Courses e2e test', () => {
   const password = process.env.E2E_PASSWORD ?? 'admin';
 
   before(async () => {
-    await browser.get('/');
-    navBarPage = new NavBarPage();
-    signInPage = await navBarPage.getSignInPage();
-    await signInPage.autoSignInUsing(username, password);
-    await browser.wait(ec.visibilityOf(navBarPage.entityMenu), 5000);
+    let input_login =element(by.css("input[id='username']"));
+    await input_login.sendKeys(username);
+    let input_password =element(by.css("input[formcontrolname='password']"));
+    await input_password.sendKeys(password);
+    let submit_button = element(by.id('loginButton'));
+    await submit_button.click();
+    let entityMenu = element(by.id('accordion-header-0'));
+    await entityMenu.click();
+    let  avirableCourses = element(by.css("div[class='ng-star-inserted']"));
+    await avirableCourses.click();
+    await sleep(20000);
   });
 
   it('should load Courses', async () => {

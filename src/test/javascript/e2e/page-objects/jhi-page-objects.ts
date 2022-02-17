@@ -1,13 +1,15 @@
 import { element, by, ElementFinder } from 'protractor';
-
+function sleep(ms: number | undefined) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 /* eslint @typescript-eslint/no-use-before-define: 0 */
 export class NavBarPage {
-  entityMenu = element(by.id('entity-menu'));
+  entityMenu = element(by.id('accordion-header-0'));
   accountMenu = element(by.id('account-menu'));
   adminMenu!: ElementFinder;
   signIn = element(by.id('login'));
   register = element(by.css('[routerLink="account/register"]'));
-  signOut = element(by.id('logout'));
+  signOut = element(by.css('button[class="sign-out-buttons"]'));
   passwordMenu = element(by.css('[routerLink="account/password"]'));
   settingsMenu = element(by.css('[routerLink="account/settings"]'));
 
@@ -50,7 +52,7 @@ export class NavBarPage {
   }
 
   async clickOnEntity(entityName: string): Promise<void> {
-    await element(by.css('[routerLink="' + entityName + '"]')).click();
+    await element(by.css('div[ng-reflect-router-link="' + entityName + '"]')).click();
   }
 
   async clickOnAdmin(entityName: string): Promise<void> {
@@ -76,7 +78,7 @@ export class NavBarPage {
   }
 
   async goToEntity(entityName: string): Promise<void> {
-    await this.clickOnEntityMenu();
+    // await this.clickOnEntityMenu();
     await this.clickOnEntity(entityName);
   }
 
@@ -91,7 +93,6 @@ export class NavBarPage {
   }
 
   async autoSignOut(): Promise<void> {
-    await this.clickOnAccountMenu();
     await this.clickOnSignOut();
   }
 }

@@ -68,4 +68,7 @@ describe('administration', () => {
     const value1 = await heading.getAttribute('jhiTranslate');
     expect(value1).to.eq(expect1);
   });
+  after(async () => {
+    await navBarPage.autoSignOut();
+  });
 });

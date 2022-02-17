@@ -14,6 +14,7 @@
           #accEntititesItem="cdkAccordionItem"
           class="accordion-item"
           role="button"
+          id="{{ item.name }}"
           tabindex="0"
           [attr.id]="'accordion-header-' + index"
           [attr.aria-expanded]="accEntititesItem.expanded"
@@ -27,6 +28,7 @@
                 <a *ngFor="let entity of getSortedMenuGroup(item.menuGroup)">
                   <div *ngIf="entity.name !== 'Sign out'">
                     <div
+                      id="{{ entity.name }}"
                       class="inner-accordion-item-body"
                       routerLink="{{ entity.path }}"
                       [style.display]="accEntititesItem.expanded ? '' : 'none'"
@@ -53,7 +55,7 @@
           </div>
           <div *ngIf="item.name === 'Data'">
             <div *ngIf="item.menuGroup.length !== 0">
-              <div class="accordion-item-header" (click)="toggleCollapseAllGroups()" (click)="accEntititesItem.toggle()">
+              <div class="accordion-item-header"  (click)="toggleCollapseAllGroups()" (click)="accEntititesItem.toggle()">
                 <span jhiTranslate="{{ item.jhiTranslateKey }}">{{ item.name }}</span>
               </div>
               <div *ngFor="let entityData of item.menuGroup.sort()">
@@ -69,6 +71,7 @@
                 </div>
                 <div *ngIf="entityData.entities.length !== 0">
                   <div
+                    id="{{ entityData.name }}"
                     class="inner-accordion-item-body groupName"
                     [style.display]="accEntititesItem.expanded ? '' : 'none'"
                     (click)="collapseMenuGroup()"

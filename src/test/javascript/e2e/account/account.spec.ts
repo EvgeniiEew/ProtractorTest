@@ -1,14 +1,6 @@
-import { browser, element, by, ExpectedConditions as ec } from 'protractor';
+import { browser, element, by } from 'protractor';
 
-import { NavBarPage, SignInPage, PasswordPage, SettingsPage } from '../page-objects/jhi-page-objects';
-
-const expect = chai.expect;
-
-
-  function sleep(ms: number | undefined) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
-
+import { NavBarPage } from '../page-objects/jhi-page-objects';
 
 describe('account', () => {
   let navBarPage: NavBarPage;

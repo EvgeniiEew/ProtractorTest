@@ -7,6 +7,7 @@ export class CoursesComponentsPage {
   noResult = element(by.id('no-result'));
   entities = element(by.id('entities'));
 
+
   async clickOnCreateButton(): Promise<void> {
     await this.createButton.click();
   }
