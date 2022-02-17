@@ -108,7 +108,7 @@
             <mat-autocomplete #autoCoursename="matAutocomplete" [displayWith]="displaycoursename">
               <mat-option
                 [value]="coursesOption.id === editForm.get('coursename')!.value?.id ? editForm.get('coursename')!.value : coursesOption"
-                *ngFor="let coursesOption of coursesfilteredOptions | async; trackBy: trackCoursesById"
+                *ngFor="let coursesOption of coursesfilteredOptions | async; trackBy: trackCoursesById; let i = index" id="course {{ i }}"
                 [value]="coursesOption"
               >
                 Coursename: {{ coursesOption.courseName }}
@@ -124,7 +124,7 @@
             <mat-autocomplete #autoStudent="matAutocomplete" [displayWith]="displaystudent">
               <mat-option
                 [value]="studentOption.id === editForm.get('student')!.value?.id ? editForm.get('student')!.value : studentOption"
-                *ngFor="let studentOption of studentsfilteredOptions | async; trackBy: trackStudentById"
+                *ngFor="let studentOption of studentsfilteredOptions | async; trackBy: trackStudentById; let i = index" id="student {{ i }}"
                 [value]="studentOption"
               >
                 Name - {{ studentOption.firstName }}

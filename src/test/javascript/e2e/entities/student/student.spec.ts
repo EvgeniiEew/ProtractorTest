@@ -1,4 +1,4 @@
-import { browser, ExpectedConditions as ec, promise } from 'protractor';
+import {browser, by, element, ExpectedConditions as ec, promise} from 'protractor';
 import { NavBarPage, SignInPage } from '../../page-objects/jhi-page-objects';
 
 import { StudentComponentsPage, StudentDeleteDialog, StudentUpdatePage } from './student.page-object';
@@ -15,55 +15,55 @@ describe('Student e2e test', () => {
   const password = process.env.E2E_PASSWORD ?? 'admin';
 
   before(async () => {
-    await browser.get('/');
     navBarPage = new NavBarPage();
-    signInPage = await navBarPage.getSignInPage();
-    await signInPage.autoSignInUsing(username, password);
-    await browser.wait(ec.visibilityOf(navBarPage.entityMenu), 5000);
+    let input_login = element(by.css("input[id='username']"));
+    await input_login.sendKeys(username);
+    let input_password = element(by.css("input[formcontrolname='password']"));
+    await input_password.sendKeys(password);
+    await browser.sleep(1000);
+    let submit_button = element(by.id('loginButton'));
+    await submit_button.click();
+    await browser.sleep(1000);
+    let entityMenu = element(by.id('accordion-header-0'));
+    await entityMenu.click();
+    let avirableCourses = element(by.id('Working data'));
+    await avirableCourses.click();
   });
 
   it('should load Students', async () => {
     await navBarPage.goToEntity('student');
     studentComponentsPage = new StudentComponentsPage();
     await browser.wait(ec.visibilityOf(studentComponentsPage.title), 5000);
+    await browser.sleep(1000);
     expect(await studentComponentsPage.getTitle()).to.eq('coursesApp.student.home.title');
+    await browser.sleep(1000);
     await browser.wait(ec.or(ec.visibilityOf(studentComponentsPage.entities), ec.visibilityOf(studentComponentsPage.noResult)), 1000);
   });
 
   it('should load create Student page', async () => {
     await studentComponentsPage.clickOnCreateButton();
     studentUpdatePage = new StudentUpdatePage();
-    expect(await studentUpdatePage.getPageTitle()).to.eq('coursesApp.student.home.createOrEditLabel');
+    await browser.sleep(1000);
     await studentUpdatePage.cancel();
   });
 
   it('should create and save Students', async () => {
     const nbButtonsBeforeCreate = await studentComponentsPage.countDeleteButtons();
-
     await studentComponentsPage.clickOnCreateButton();
-
-    await promise.all([
-      studentUpdatePage.setFirstNameInput('firstName'),
-      studentUpdatePage.setLastNameInput('lastName'),
-      studentUpdatePage.setDateOfBirthdayInput('2000-12-31'),
-    ]);
-
+    await studentUpdatePage.setFirstNameInput('firstName'),
+    await studentUpdatePage.setLastNameInput('lastName'),
+    await studentUpdatePage.setDateOfBirthdayInput('2000-12-31'),
+    await browser.sleep(1000);
     await studentUpdatePage.save();
-    expect(await studentUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
-
     expect(await studentComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeCreate + 1, 'Expected one more entry in the table');
   });
 
   it('should delete last Student', async () => {
-    const nbButtonsBeforeDelete = await studentComponentsPage.countDeleteButtons();
     await studentComponentsPage.clickOnLastDeleteButton();
+    await browser.sleep(1000);
+    let confirmButton = element(by.id('jhi-confirm-delete-student'));
+    await confirmButton.click();
 
-    studentDeleteDialog = new StudentDeleteDialog();
-    expect(await studentDeleteDialog.getDialogTitle()).to.eq('coursesApp.student.delete.question');
-    await studentDeleteDialog.clickOnConfirmButton();
-    await browser.wait(ec.visibilityOf(studentComponentsPage.title), 5000);
-
-    expect(await studentComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);
   });
 
   after(async () => {

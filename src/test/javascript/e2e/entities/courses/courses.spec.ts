@@ -54,7 +54,6 @@ describe('Courses e2e test', () => {
     await coursesUpdatePage.setCourseNameInput('courseName');
     await coursesUpdatePage.setDateOfStartInput('2000-12-31');
     await coursesUpdatePage.setDateOfEndInput('2000-12-31');
-    await browser.sleep(1000);
     await coursesUpdatePage.nameSelectLastOption();
     await browser.sleep(1000);
     await coursesUpdatePage.save();

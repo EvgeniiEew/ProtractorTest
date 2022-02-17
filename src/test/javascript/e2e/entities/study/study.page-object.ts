@@ -2,7 +2,7 @@ import { element, by, ElementFinder } from 'protractor';
 
 export class StudyComponentsPage {
   createButton = element(by.id('jh-create-entity'));
-  deleteButtons = element.all(by.css('jhi-study div table .btn-danger'));
+  deleteButtons = element.all(by.css("button[data-cy='entityDeleteButton']"));
   title = element.all(by.css('jhi-study div h2#page-heading span')).first();
   noResult = element(by.id('no-result'));
   entities = element(by.id('entities'));
@@ -33,9 +33,8 @@ export class StudyUpdatePage {
   dateOfStartInput = element(by.id('field_dateOfStart'));
   dateOfExamInput = element(by.id('field_dateOfExam'));
   gradeInput = element(by.id('field_grade'));
-
-  coursenameSelect = element(by.id('field_coursename'));
-  studentSelect = element(by.id('field_student'));
+  coursenameSelect = element(by.css("input[formcontrolname='coursename']"));
+  studentSelect = element(by.css("input[formcontrolname='student']"));
 
   async getPageTitle(): Promise<string> {
     return this.pageTitle.getAttribute('jhiTranslate');
@@ -74,7 +73,9 @@ export class StudyUpdatePage {
   }
 
   async coursenameSelectLastOption(): Promise<void> {
-    await this.coursenameSelect.all(by.tagName('option')).last().click();
+    await this.coursenameSelect.click();
+    let element_study = element(by.id('course 0'));
+    await element_study.click();
   }
 
   async coursenameSelectOption(option: string): Promise<void> {
@@ -90,7 +91,9 @@ export class StudyUpdatePage {
   }
 
   async studentSelectLastOption(): Promise<void> {
-    await this.studentSelect.all(by.tagName('option')).last().click();
+    await this.studentSelect.click();
+    let element_student = element(by.id('student 0'));
+    await element_student.click();
   }
 
   async studentSelectOption(option: string): Promise<void> {

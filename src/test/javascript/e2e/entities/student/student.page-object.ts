@@ -2,7 +2,7 @@ import { element, by, ElementFinder } from 'protractor';
 
 export class StudentComponentsPage {
   createButton = element(by.id('jh-create-entity'));
-  deleteButtons = element.all(by.css('jhi-student div table .btn-danger'));
+  deleteButtons = element.all(by.css("button[data-cy='entityDeleteButton']"));
   title = element.all(by.css('jhi-student div h2#page-heading span')).first();
   noResult = element(by.id('no-result'));
   entities = element(by.id('entities'));

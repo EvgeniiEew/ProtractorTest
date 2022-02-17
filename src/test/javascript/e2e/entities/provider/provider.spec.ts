@@ -7,10 +7,8 @@ const expect = chai.expect;
 
 describe('Provider e2e test', () => {
   let navBarPage: NavBarPage;
-  let signInPage: SignInPage;
   let providerComponentsPage: ProviderComponentsPage;
   let providerUpdatePage: ProviderUpdatePage;
-  let providerDeleteDialog: ProviderDeleteDialog;
   const username = process.env.E2E_USERNAME ?? 'admin';
   const password = process.env.E2E_PASSWORD ?? 'admin';
 

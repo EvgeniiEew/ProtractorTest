@@ -16,9 +16,7 @@ describe('account', () => {
     await browser.sleep(1000);
     let input_login =element(by.css("input[id='username']"));
     await input_login.sendKeys(username);
-    await browser.sleep(1000);
     let input_password =element(by.css("input[formcontrolname='password']"));
-    await browser.sleep(1000);
     await input_password.sendKeys(password);
     let submit_button = element(by.id('loginButton'));
     await browser.sleep(1000);
