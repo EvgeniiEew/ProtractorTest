@@ -101,7 +101,8 @@
             <mat-autocomplete #autoName="matAutocomplete" [displayWith]="displayname">
               <mat-option
                 [value]="providerOption.id === editForm.get('name')!.value?.id ? editForm.get('name')!.value : providerOption"
-                *ngFor="let providerOption of providersfilteredOptions | async; trackBy: trackProviderById"
+                *ngFor="let providerOption of providersfilteredOptions | async; trackBy: trackProviderById; let i = index"
+                id="provider {{ i }}"
                 [value]="providerOption"
               >
                 Provider - {{ providerOption.name }}
